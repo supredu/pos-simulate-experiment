@@ -103,7 +103,7 @@ func IntToHex(num int64) []byte {
 }
 
 // SHA256(SHA256(tradeData|timeCounter))<= D x coinAge
-// POS机制的核心算法，设置的是10s之后开始计算币龄，根据币龄coinAge调整当前难度Dif以获取真实难度realDif。
+// POS机制的核心算法，设置的是10s之后开始计算币龄。
 func ProofOfStake(dif int, addr string, b Block) ([]byte, int, int64) {
 	var coinAge int64
 	var realDif int64
