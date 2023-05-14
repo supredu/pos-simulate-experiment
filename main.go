@@ -75,12 +75,12 @@ func PrintMiners(Miners []Miner) {
 
 //挖矿
 
-func Mine(Miners []Miner,Dif int64, traceData string,BlockChain []Block)  {
+func Mine(Miners []Miner,Dif int64, tradeData string,BlockChain []Block)  {
 	fmt.Println("开始挖矿")
-	winnerIndex := Pos(&Miners, Dif, traceData)
+	winnerIndex := Pos(&Miners, Dif, tradeData)
 	fmt.Println("挖矿成功")
 	AddCoin(NewCoin(int64(winnerIndex), Miners), &Coins)
-	GenerateBlock(winnerIndex, Miners, Coins[len(Coins)-1], "third block", &BlockChain)
+	GenerateBlock(winnerIndex, Miners, Coins[len(Coins)-1], tradeData, &BlockChain)
 	time.Sleep(5*time.Second)
 	UpdateMiners(&Coins, &Miners)
 	PrintMiners(Miners)
