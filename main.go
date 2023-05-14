@@ -46,8 +46,8 @@ func main() {
 	PrintMiners(Miners)
 
 	//挖矿
-	Mine(Miners, Dif, "third block",BlockChain)
-	Mine(Miners, Dif, "fourth block",BlockChain)
+	Mine(Miners, Dif, "third block",&BlockChain)
+	Mine(Miners, Dif, "fourth block",&BlockChain)
 
 
 
@@ -55,11 +55,13 @@ func main() {
 	for i, block := range BlockChain {
 		prevBlockHash := hex.EncodeToString(block.PrevHash)
 		currentHash := hex.EncodeToString(block.Hash)
-		if i == 0{
+		if i == 1{
 			fmt.Printf("prevBlockHash: %s, currentHash : 0x%s \n",prevBlockHash,currentHash)
-		}else {
+		} else{
 			fmt.Printf("prevBlockHash: 0x%s, currentHash : 0x%s \n",prevBlockHash,currentHash)
+
 		}
+
 
 	}
 
@@ -75,12 +77,12 @@ func PrintMiners(Miners []Miner) {
 
 //挖矿
 
-func Mine(Miners []Miner,Dif int64, tradeData string,BlockChain []Block)  {
+func Mine(Miners []Miner,Dif int64, tradeData string,BlockChain *[]Block)  {
 	fmt.Println("开始挖矿")
 	winnerIndex := Pos(&Miners, Dif, tradeData)
 	fmt.Println("挖矿成功")
 	AddCoin(NewCoin(int64(winnerIndex), Miners), &Coins)
-	GenerateBlock(winnerIndex, Miners, Coins[len(Coins)-1], tradeData, &BlockChain)
+	GenerateBlock(winnerIndex, Miners, Coins[len(Coins)-1], tradeData, BlockChain)
 	time.Sleep(5*time.Second)
 	UpdateMiners(&Coins, &Miners)
 	PrintMiners(Miners)
