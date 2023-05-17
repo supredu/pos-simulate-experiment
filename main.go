@@ -35,6 +35,8 @@ func main() {
 	//调用InitBlockChain函数，生成一个区块数组
 	//var BlockChain []Block
 	BlockChain = InitBlockChain(Miners, Coins)
+	PrintMiners(Miners)
+
 	fmt.Println("创建第二个区块")
 	GenerateBlock(0, Miners, Coins[0], "second block", &BlockChain)
 	fmt.Println("创建结束")
@@ -55,7 +57,7 @@ func main() {
 	for i, block := range BlockChain {
 		prevBlockHash := hex.EncodeToString(block.PrevHash)
 		currentHash := hex.EncodeToString(block.Hash)
-		if i == 1{
+		if i == 0{
 			fmt.Printf("prevBlockHash: %s, currentHash : 0x%s \n",prevBlockHash,currentHash)
 		} else{
 			fmt.Printf("prevBlockHash: 0x%s, currentHash : 0x%s \n",prevBlockHash,currentHash)
