@@ -24,6 +24,9 @@ func main() {
 	Miners = InitMiners()
 	//添加矿工1
 	AddMiner(*createMiner(),&Miners)
+	AddMiner(*createMiner(),&Miners)
+	AddMiner(*createMiner(),&Miners)
+	AddMiner(*createMiner(),&Miners)
 	PrintMiners(Miners)
 	//创建币池数组Coins
 	//var Coins []Coin
@@ -81,7 +84,10 @@ func PrintMiners(Miners []Miner) {
 
 func Mine(Miners []Miner,Dif int64, tradeData string,BlockChain *[]Block)  {
 	fmt.Println("开始挖矿")
-	winnerIndex := Pos(&Miners, Dif, tradeData)
+	winnerIndex := CorrectMiner(&Miners , Dif, tradeData)
+	if winnerIndex == -1 {
+		panic("挖矿失败")
+	}
 	fmt.Println("挖矿成功")
 	AddCoin(NewCoin(int64(winnerIndex), Miners), &Coins)
 	GenerateBlock(winnerIndex, Miners, Coins[len(Coins)-1], tradeData, BlockChain)
