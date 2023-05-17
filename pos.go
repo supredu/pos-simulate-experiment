@@ -18,8 +18,8 @@ func Pos(Miners *[]Miner, Dif int64, tradeData string) int {
 		var hashInt big.Int
 		hashInt.SetBytes(hash[:])
 		for i := 0; i < len(*Miners); i++ {
-			//最小持币量为3才能挖矿
-			if (*Miners)[i].num <= 2 {
+			//最小持币量为2才能挖矿
+			if (*Miners)[i].num < 2 {
 				continue
 			}
 			// 数据长度为8位

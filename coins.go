@@ -1,7 +1,8 @@
 package main
 
 import (
-	"math/rand"
+	"crypto/rand"
+	"math/big"
 	"time"
 )
 
@@ -17,8 +18,9 @@ type Coin struct {
 // 生成新coin函数，传入矿工序号，返回一个coin
 
 func NewCoin(MinerIndex int64, Miners []Miner) Coin {
+	n, _ := rand.Int(rand.Reader, big.NewInt(4))
 	coin := Coin{
-		Num:        1 + rand.Int63n(5),
+		Num:        1 + n.Int64(),
 		MinerIndex: MinerIndex,
 		Time:       time.Now().Unix(),
 	}
