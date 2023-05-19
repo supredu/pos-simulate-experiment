@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha256"
+	"fmt"
 	"time"
 )
 
@@ -47,4 +48,13 @@ func UpdateMiners(Coins *[]Coin, Miners *[]Miner) []Miner {
 		(*Coins)[i].Time = time.Now().Unix()
 	}
 	return *Miners
+}
+
+func AddMiners() {
+	var MinerNum int
+	fmt.Print("请输入创建矿工的数量：")
+	fmt.Scanf("%d",&MinerNum)
+	for i := 0; i < MinerNum; i++ {
+		AddMiner(*createMiner(),&Miners)
+	}
 }
