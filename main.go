@@ -90,10 +90,10 @@ func Mine(Miners []Miner,Dif int64, tradeData string,BlockChain *[]Block)  {
 func IsContinueMining() {
 	var isContinue string
 	for  {
-		fmt.Println("开始or结束 挖矿?y or n")
+		Mine(Miners, Dif, "New block",&BlockChain)
+		fmt.Println("是否继续挖矿?y or n")
 		fmt.Scanf("%s",&isContinue)
 		if isContinue == "y" {
-			Mine(Miners, Dif, "New block",&BlockChain)
 			continue
 		}else if isContinue == "n" {
 			break
