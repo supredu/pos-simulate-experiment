@@ -21,10 +21,10 @@ func main() {
 	//var Dif int64 = 1
 	//创建矿工数组Miners
 	//var Miners []Miner
+	//初始化矿工
 	Miners = InitMiners()
 	//添加矿工
 	AddMiners()
-
 	//创建币池数组Coins
 	//var Coins []Coin
 	//给矿工数组中的矿工添加币
@@ -47,7 +47,7 @@ func main() {
 	IsContinueMining()
 
 	//打印区块
-	PrintBlockChain()
+	//PrintBlockChain()
 
 }
 
@@ -80,6 +80,7 @@ func Mine(Miners []Miner,Dif int64, tradeData string,BlockChain *[]Block)  {
 		panic("挖矿失败")
 	}
 	fmt.Println("挖矿成功")
+	fmt.Println("本轮获胜矿工:",winnerIndex)
 	AddCoin(NewCoin(int64(winnerIndex), Miners), &Coins)
 	GenerateBlock(winnerIndex, Miners, Coins[len(Coins)-1], tradeData, BlockChain)
 	time.Sleep(5*time.Second)
@@ -96,6 +97,7 @@ func IsContinueMining() {
 		if isContinue == "y" {
 			continue
 		}else if isContinue == "n" {
+			fmt.Println("挖矿结束")
 			break
 		}else{
 			fmt.Println("输入错误")
